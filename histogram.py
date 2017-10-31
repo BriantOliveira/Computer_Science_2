@@ -1,8 +1,8 @@
 import random
 from functools import reduce
 
-read_file = word_file.read()
-split_file = read_file.split()
+#read_file = word_file.read()
+#split_file = read_file.split()
 word_list = ["Rohan", "Willie", "Elliot", "Tia", "Matt", "Captain Rainbow", "Alan", "Braus"]
 
 def find_consistency_of_words(user_input, word_list):
@@ -47,4 +47,15 @@ def generate_weights(word_list):
         weight_dictionary[word] = weight_occurences
     return weight_dictionary
 
-def list_of_tuples_histogram
+def list_of_tuples_histogram():
+    list_of_turples = list((zip(histogram(word_list).keys(), histogram(word_list).values())))
+    return list_of_turples
+
+def list_of_histogram():
+    base_list = []
+    for key, value in histogram(word_list).items():
+        structured_list = [key, value]
+        base_list.append(structured_list)
+    return base_list
+
+print(histogram(word_list))
