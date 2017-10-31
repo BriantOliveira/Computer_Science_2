@@ -1,7 +1,8 @@
 import sys
 from random import randrange
+import time
 
-with open("/user/share/dict/words", "r") as r:
+with open(".txt", "r") as r:
     words = r.read()
 
 
@@ -22,8 +23,9 @@ def create_quote(length):
     return quote
 
 if __name__ == "__main__":
-    user_args = sys.argv[1]
-    quote_length = int(user_args)
-
+    time_before = time.time()
+    quote_length = int(sys.argv[-1])
     quote = create_quote(quote_length)
     print(quote)
+    time_after = time.time()
+    print(time_before - time_after)
