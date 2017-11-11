@@ -31,13 +31,6 @@ def histogram(word_list):
         word_frequency[word] = occurences
     return word_frequency
 
-def generate_random_word():
-    user_input = str(input()).split()
-    for word in histogram(user_input):
-        random_index = random.randint(0, len(user_input) -1)
-        random_word = user_input[random_index]
-    return random_word
-
 def generate_weights(word_list):
     weight_dictionary = {}
     sum_values = sum(histogram(word_list).values())
@@ -48,8 +41,20 @@ def generate_weights(word_list):
     return weight_dictionary
 
 def list_of_tuples_histogram():
-    list_of_turples = list((zip(histogram(word_list).keys(), histogram(word_list).values())))
-    return list_of_turples
+    #This function will make histogram into a list of turples
+    base_list = []
+    structured_turple = ()
+
+    for word in word_list:
+        word_tuple = (word, )
+        occurences = word_list.count(word)
+        word_occurences = occurences
+        if word not in structured_turple:
+            structured_turple = word_tuple + (word_occurences, )
+        if structured_turple not in base_list:
+            base_list.append(structured_turple)
+    second_element = [x[1] for x in base_list]
+    return second_element
 
 def list_of_histogram():
     base_list = []
