@@ -14,7 +14,7 @@ class Listogram(list):
         for word in cleaned_text:
             word_tuple = (word, )
             word_occurences = cleaned_text.count(word)
-            occurences_in_dictionary_words[word] = word_occurences
+            occurences_in_dictionary_word[word] = word_occurences
             if word not in pairs_of_histogram:
                 pairs_of_histogram = word_tuple + (word_occurences, )
                 print("\"{}\" appears {} times".format(word, word_occurences))
@@ -26,7 +26,7 @@ class Listogram(list):
     def frequency_of_certain_word(self):
         certain_list_of_pair_of_word = []
         user_input = str(input())
-        cleaned_text = cleanup.clean_text.(self.word_text)
+        cleaned_text = cleanup.clean_text(self.word_text)
         if user_input in cleaned_text:
             certain_word_occurance = cleaned_text.count(user_input)
             certain_list_of_pair_of_word = [user_input, certain_word_occurance]
