@@ -56,11 +56,32 @@ def list_of_tuples_histogram():
     second_element = [x[1] for x in base_list]
     return second_element
 
-def list_of_histogram():
-    base_list = []
-    for key, value in histogram(word_list).items():
-        structured_list = [key, value]
-        base_list.append(structured_list)
-    return base_list
+def create_weight_using_turple(word_list):
+    general_list = []
+    main_turple = ()
+    sum_values = sum(list_of_tuples_histogram(word_list))
+
+    for word in word_list:
+        weighted_occurences = word_list.count(word) / sum_values
+        word_turple = (word, )
+        if word not in main_turple:
+            main_turple = word_turple + (weighted_occurences, )
+        if main_turple not in general_list:
+            general_list.append(main_turple)
+    return general_list
+
+def list_of_histogram(word_list):
+    general_list = []
+    main_list = []
+    for word in word_list:
+        occurences = word_list.count(word)
+        if word not in main_list:
+            main_list = [word, occurences]
+        if main_list not in general_list:
+            general_list.append(main_list)
+    second_element = [x[1] for x in general_list]
+    return second_element
+
+
 
 print(histogram(word_list))
