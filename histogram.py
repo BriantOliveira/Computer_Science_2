@@ -89,6 +89,13 @@ def creating_random_word_histogram():
         random_word = word_list[random_index]
     return random_word
 
+def random_relational_word(word_list, probabilities):
+    create_random_number = creating_randomness.gen_random_range(0, 1)
+    cumalitive_probability = 0.0
+    for word, weighted_occurence in zip(word_list, probabilities):
+        cumalitive_probability += weighted_occurence
+        if create_random_number < cumalitive_probability:
+            break
+        return
 
-
-print(histogram(word_list))
+print(list_of_histogram(word_list))
