@@ -18,4 +18,17 @@ referance_keys = dictionary_of_words.keys()
 random_key = random.choice(list(referance_keys))
 key_index = list(dictionary_of_words.keys()).index(random_key)
 
-def creating promp
+def creating_promp_to_user(dictionary_of_words):
+    print("Guess the definition of the word %s" %(random_key))
+    user_input = str(input())
+    if user_input is not None:
+        print ("The correct definition is %s" %(dictionary_of_words[random_key]))
+    return ''
+
+'''
+if __name__ == '__main__': 
+    start_time = time.time()
+    print(random_argument(slipt_file))
+    end_time = time.time()
+    print(end_time - start_time) m 
+'''
