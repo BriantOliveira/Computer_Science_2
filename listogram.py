@@ -25,4 +25,24 @@ class Listogram(list):
 
     def frequency_of_certain_word(self):
         certain_list_of_pair_of_word = []
-        user
+        user_input = str(input())
+        cleaned_text = cleanup.clean_text.(self.word_text)
+        if user_input in cleaned_text:
+            certain_word_occurance = cleaned_text.count(user_input)
+            certain_list_of_pair_of_word = [user_input, certain_word_occurance]
+        else:
+            return 'The word searched has the frequency of 0'
+        return certain_list_of_pair_of_word
+
+    def bool_of_values(self):
+        in_there = True
+        not_there = False
+        user_input = str(input())
+        for word in self.listogram():
+            if user_input in word:
+                print("The word is in there")
+        return
+
+    listogram_words = Listogram("hangover_movie_script.txt")
+
+    print(listogram_words.listogram())
