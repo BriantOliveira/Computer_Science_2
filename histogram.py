@@ -82,6 +82,13 @@ def list_of_histogram(word_list):
     second_element = [x[1] for x in general_list]
     return second_element
 
+def creating_random_word_histogram():
+    # Will generate a random word
+    for word in word_list:
+        random_index = creating_randomness.gen_random_range(0, len(word_list) -1)
+        random_word = word_list[random_index]
+    return random_word
+
 
 
 print(histogram(word_list))
