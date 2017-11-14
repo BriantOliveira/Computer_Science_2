@@ -50,14 +50,14 @@ class Dictogram(dict):
                 rare_word[key] = value
         return rare_word
 
-    def pair_together(self):
-        '''Pairs given body together'''
-        text_paired = {}
-        cleaned_text = split_array.clean_text(self.word_text)
-        rare_word = max(self.create_histogram().values())
-        for word in range(len(cleaned_text[:10]) -1):
-            text_paired[cleaned_text[word]] = {cleaned_text[word + 1]: }
-        return text_paired
+    # def pair_together(self):
+    #     '''Pairs given body together'''
+    #     text_paired = {}
+    #     cleaned_text = split_array.clean_text(self.word_text)
+    #     rare_word = max(self.create_histogram().values())
+    #     for word in range(len(cleaned_text[:10]) -1):
+    #         text_paired[cleaned_text[word]] = {cleaned_text[word + 1] }
+    #     return text_paired
 
 
     def look_for_word_entered(self, user_input):
@@ -75,25 +75,41 @@ class Dictogram(dict):
     def build_states_and_transitions(self):
         '''Find the state and trasition'''
         word_list = []
-        probability = {}
+        probability_of_word = {}
         dictionary_chain = {}
         pair_list = list(self.pair_together())
         count = 0
 
         while count != (len(pair_list) -1):
             for word in self.all_words():
-            next_word = self.all_words().count(self.look_for_word_entered(word))
+                next_word = self.all_words().count(self.look_for_word_entered(word))
             current_word = self.all_words().count(word)
             probability = next_word / current_word
             new_word = self.all_words().index(word) + 1
             new_word_values = pair_list[new_word]
-            dictionary_chain[word] = {self.look_for_word_entered(new_word_values): probability}
+            dictionary_chain[word] = {self.look_for_word_entered(new_word_values): probability_of_word}
             count = count + 1
         return dictionary_chain
 
 
+#dictogram = Dictogram('hangover_movie_script.txt')
+cleaned_text = split_array.clean_text('hangover_movie_script.txt')[:100]
+
+'''create dictionary that the current word is the key while the value is a dictionaty'''
+def markov_chain(cleaned_text):
+    print(cleaned_text)
+    markov_dictionary = {}
+    x = 0
+    while x < len(cleaned_text) -1:
+        current_word = cleaned_text[x]
+        next_word = cleaned_text[x + 1]
+        if current_word not in markov_dictionary.keys():
+            markov_dictionary[current_word] = Dictogram()
+        markov_dictionary[current_word].adding_count(next_word)
+        x += 1
+
+        return markov_dictionary
 
 
-dictogram = Dictogram('hangover_movie_script.txt')
-
-print(dictogram.frequency_of_given_word("the"))
+#print(dictogram.frequency_of_given_word("the"))
+print(markov_chain("one fish two fish red fish blue fish".split()))
