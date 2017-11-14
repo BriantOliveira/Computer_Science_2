@@ -1,16 +1,16 @@
-import cleanup
+import split_array
 import pdb
 
 class Listogram(list):
     def __init__(self, word_text):
         self.word_text = word_text
 
-    def listogram(self):
+    def create_listogram(self):
         dictionary_occurences = {}
         dictionary_word = {}
         histogram_list = []
         pairs_of_histogram = ()
-        cleaned_text = cleanup.cleaned_given_text(self.word_text)[:100]
+        cleaned_text = split_array.cleaned_given_text(self.word_text)[:100]
         for word in cleaned_text:
             word_tuple = (word, )
             word_occurences = cleaned_text.count(word)
@@ -26,7 +26,7 @@ class Listogram(list):
     def frequency_of_certain_word(self):
         certain_list_of_pair_of_word = []
         user_input = str(input())
-        cleaned_text = cleanup.clean_text(self.word_text)
+        cleaned_text = split_array.clean_text(self.word_text)
         if user_input in cleaned_text:
             certain_word_occurance = cleaned_text.count(user_input)
             certain_list_of_pair_of_word = [user_input, certain_word_occurance]
@@ -38,11 +38,11 @@ class Listogram(list):
         in_there = True
         not_there = False
         user_input = str(input())
-        for word in self.listogram():
+        for word in self.create_listogram():
             if user_input in word:
                 print("The word is in there")
         return
 
-    listogram_words = Listogram("hangover_movie_script.txt")
+listogram = Listogram("hangover_movie_script.txt")
 
-    print(listogram_words.listogram())
+print(listogram.create_listogram())
