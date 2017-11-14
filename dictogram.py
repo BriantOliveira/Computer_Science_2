@@ -42,6 +42,32 @@ class Dictogram(dict):
             return 'This word does not occures'
         return given_word_frequency
 
+    def look_for_rare_word(self):
+        rare_word = {}
+        high_occurence = max(self.create_histogram().values())
+        for key, value in self.create_histogram().items():
+            if value == high_occurence:
+                rare_word[key] = value
+        return rare_word
+
+    def pair_together(self):
+        '''Pairs given body together'''
+        text_paired = {}
+        cleaned_text = split_array.clean_text(self.word_text)
+        rare_word = max(self.create_histogram().values())
+        for word in range(len(cleaned_text[:10]) -1):
+            text_paired[cleaned_text[word]] = {cleaned_text[word + 1]: }
+        return text_paired
+
+
+    def look_for_word_entered(self, user_input):
+       pair_list = list(self.pair_together())
+       new_word = pair_list.index(user_input)
+       return pair_list[new_word]
+
+    def all_words(self):
+
+
 dictogram = Dictogram('hangover_movie_script.txt')
 
 print(dictogram.frequency_of_given_word("the"))
