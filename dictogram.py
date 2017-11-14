@@ -66,6 +66,11 @@ class Dictogram(dict):
        return pair_list[new_word]
 
     def all_words(self):
+        list_of_words = []
+        cleaned_text = split_array.clean_text(self.word_text)[:100]
+        for word in cleaned_text:
+            list_of_words.append(word)
+        return list_of_words
 
 
 dictogram = Dictogram('hangover_movie_script.txt')
