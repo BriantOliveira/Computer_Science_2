@@ -7,17 +7,23 @@ class Dictogram(dict):
 
     def create_histogram(self):
         frequency_of_word = {}
-        cleaned_text = split_array.clean_given_text(self.word_text)[:100]
+        cleaned_text = split_array.clean_text(self.word_text)[:1000]
         for word in cleaned_text:
             occurences_of_the_word = cleaned_text.count(word)
             frequency_of_word[word] = occurences_of_the_word
         return frequency_of_word
 
+    def adding_count(self, word, count=1):
+        if word not in self:
+            self[word] = count
+        else:
+            self[word] += count
+
     def weights_of_histogram(self):
         '''Create the weights or the occurences of the words'''
         dictionary_weight = {}
         sum_values = sum(self.create_histogram().values())
-        cleaned_text = split_array.clean_given_text(self.word_text)
+        cleaned_text = split_array.clean_text(self.word_text)[:1000]
         for word in cleaned_text:
             occurences_of_word = self.word_text.count(word)
             occurences_weight = occurences_of_word / sum_values
@@ -28,10 +34,10 @@ class Dictogram(dict):
         '''find frequency of the word of user input'''
         given_word_frequency = {}
         user_input = str(input())
-        cleaned_text = split_array.clean_given_text(self.word_text)
+        cleaned_text = split_array.clean_text(self.word_text)[:1000]
         if user_input in cleaned_text:
             occurence_on_given_word = cleaned_text.count(user_input)
-            frequency_on_given_word[user_input] = occurence_on_given_word
+            given_word_frequency[user_input] = occurence_on_given_word
         else:
             return 'This word does not occures'
         return given_word_frequency
