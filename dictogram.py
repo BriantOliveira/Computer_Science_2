@@ -72,6 +72,27 @@ class Dictogram(dict):
             list_of_words.append(word)
         return list_of_words
 
+    def build_states_and_transitions(self):
+        '''Find the state and trasition'''
+        word_list = []
+        probability = {}
+        dictionary_chain = {}
+        pair_list = list(self.pair_together())
+        count = 0
+
+        while count != (len(pair_list) -1):
+            for word in self.all_words():
+            next_word = self.all_words().count(self.look_for_word_entered(word))
+            current_word = self.all_words().count(word)
+            probability = next_word / current_word
+            new_word = self.all_words().index(word) + 1
+            new_word_values = pair_list[new_word]
+            dictionary_chain[word] = {self.look_for_word_entered(new_word_values): probability}
+            count = count + 1
+        return dictionary_chain
+
+
+
 
 dictogram = Dictogram('hangover_movie_script.txt')
 
