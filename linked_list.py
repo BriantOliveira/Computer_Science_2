@@ -24,3 +24,12 @@ class linked_list:
             total+=1
             cur = cur.next
         return total
+    ''' function to display the current contents of the list '''
+    def display(self):
+        elems = []
+        cur_node = self.head
+        while cur_node.next!=None:
+            cur_node=cur_node.next
+            elems.append(cur_node.data)
+        print(elems)
+
