@@ -16,3 +16,11 @@ class linked_list:
         while cur.next!=None:
             cur = cur.next
         cur.next = new_node
+    """ function that will determined what is the len of the linked list """
+    def length(self):
+        cur = self.head
+        total = 0
+        while cur.next!=None:
+            total+=1
+            cur = cur.next
+        return total
