@@ -33,12 +33,36 @@ class linked_list:
             elems.append(cur_node.data)
         print(elems)
 
-my_list = linked_list()
+# my_list = linked_list()
+#
+# my_list.display()
+#
+# my_list.append(1)
+# my_list.append(2)
+#
+# my_list.display()
 
-my_list.display()
+    """ function that will extract a pointer """
+    def get(self,index):
+        if index>=self.length():
+            print("ERROR: 'GET' Index out of range!")
+            return None
+        cur_indx=0
+        cur_node=self.head
+        while True:
+            cur_node=cur_node.next
+            if cur_indx==index: return cur_node.data
+            cur_indx+=1
+
+my_list = linked_list()
 
 my_list.append(1)
 my_list.append(2)
+my_list.append(3)
+my_list.append(4)
+my_list.append(5)
 
 my_list.display()
+
+print("element at 2nd index: %d" % my_list.get(2))
 
