@@ -33,3 +33,12 @@ class linked_list:
             elems.append(cur_node.data)
         print(elems)
 
+my_list = linked_list()
+
+my_list.display()
+
+my_list.append(1)
+my_list.append(2)
+
+my_list.display()
+
