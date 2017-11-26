@@ -54,8 +54,35 @@ class linked_list:
             if cur_indx==index: return cur_node.data
             cur_indx+=1
 
+# my_list = linked_list()
+#
+# my_list.append(1)
+# my_list.append(2)
+# my_list.append(3)
+# my_list.append(4)
+# my_list.append(5)
+#
+# my_list.display()
+#
+# print("element at 2nd index: %d" % my_list.get(2))
+#
+    ''' erase function that will erase any given node '''
+    def erase(self,index):
+      if index>=self.length():
+          print("ERROR: 'Erase' Index out of range!")
+          return
+      cur_indx=0
+      cur_node=self.head
+      while True:
+          last_node = cur_node
+          cur_node = cur_node.next
+          if cur_indx==index:
+              last_node.next = cur_node.next
+              return
+          cur_indx+=1
 my_list = linked_list()
 
+my_list.append(0)
 my_list.append(1)
 my_list.append(2)
 my_list.append(3)
@@ -64,5 +91,6 @@ my_list.append(5)
 
 my_list.display()
 
-print("element at 2nd index: %d" % my_list.get(2))
+my_list.erase(3)
 
+my_list.display()
