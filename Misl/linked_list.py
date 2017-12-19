@@ -3,8 +3,8 @@
 class node:
     """ Passing the data pointer and setting the default to none"""
     def __init__(self,data=None):
-        self.data=data
-        self.next=None
+        self.data = data
+        self.next = None
     """ Wrapper that wraps up the nodes, the user will not interface with the node class """
 class linked_list:
     def __init__(self):

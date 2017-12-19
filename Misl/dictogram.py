@@ -1,4 +1,4 @@
-import split_array
+ import split_array
 import pdb
 
 class Dictogram(dict):
