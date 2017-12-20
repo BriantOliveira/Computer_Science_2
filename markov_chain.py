@@ -55,4 +55,54 @@ class Markov_chain_Nth_order(object):
         """Sample Dictagram and build new sentences"""
 
     chain = self.initialize_chain()
-    cur_position = self.select
+    cur_position = self.select_cur_position(chain)
+    start, delimiter, is_first = "", " ", True
+
+    print("CHAIN: {}\n".format(chain))
+
+    while (cur_position in self.states) and (cur_position != chain) and (cur_position != None):
+        if not is_first:
+            start += delimiter
+
+        start += cur_position[len(cur_position) -1]
+        cur_position = self.select_cur_position(cur_position)
+        is_first = False
+
+    walk_over = start + delimiter + cur_position[len(cur_position) -1]
+
+    return walk_over
+
+
+    def select_cur_position(self, pos):
+        """Method to select word position in the corpus randomly"""
+        cur_position = self.states[pos][ri(0, len(self.state[pos]) -1)]
+        return cur_position
+
+
+    def create_markov_model():
+        """Create and run class instance, create copus from Harry Potter book"""
+
+        with open("harry_potter_books.txt") as f:
+            corpus = f.read().split()
+
+            if len(sys.argv) > 1:
+                if sys.argv[1].isnumeric():
+                    print("Numeric input received successfully... LODING... \n\nORDER OF MARKOV:\nn = {}".format(int(sys.argv[1])))
+                    markov = Markov_chain_Nth_order(int(sys.argv[1]))
+
+                else:
+                    print("ERROR INPUT INVALID. REVERTING TO DEFAULT:\n\nORDER OF MARKOV:\n\n = 1")
+                    markov = Markov_chain_Nth_order()
+
+            else:
+                print("DID NOT RECEIVED AN INPUT... REVERTING TO DEFAULT:\n\nORDER OF MARKOV:\nn =1")
+                markov = Markov_chain_Nth_order()
+
+                # Random walk over then reformating to final sentence
+                markov.create_states(corpus)
+                random_walk_over = markov.construct_sentence()
+                output = random_walk_over[0].upper() + random_walk_over[1:]
+
+                print("OUTPUT SENTENCE: {}...".format(output[:140]))
+                return
+            
