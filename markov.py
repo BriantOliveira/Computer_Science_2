@@ -4,7 +4,7 @@ class Markov(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
 
 
-    def __init__(self, world_list=None):
+    def __init__(self, word_list=None):
         """Initialize the histogram as a new dictogram and count the words given"""
         super(Markov, self).__init__()
 
@@ -63,4 +63,4 @@ class Markov(dict):
                 markov[(cur_word, next_word)].add_count(word_after_next)
                 index += 1
                 return markov
-            
+    def print_histogram(word_list)
