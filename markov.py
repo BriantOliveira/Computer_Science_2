@@ -63,4 +63,17 @@ class Markov(dict):
                 markov[(cur_word, next_word)].add_count(word_after_next)
                 index += 1
                 return markov
-    def print_histogram(word_list)
+
+
+    def print_histogram(word_list):
+        print("print_function: is printing HERE!!!")
+        print('word list: {}'.format(word_list))
+        #Dictagram display
+        histogram = Markov(word_list)
+        print('dictogram: {}'.format(histogram))
+        print('{} tokens, {} types'.format(histogram.token, histogram.types))
+        for word in word_list[-2:]:
+            freq = histogram.frequency(word)
+            print('{!r} occurs {} times'.format(word, freq))
+
+            
