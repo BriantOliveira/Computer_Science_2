@@ -76,4 +76,19 @@ class Markov(dict):
             freq = histogram.frequency(word)
             print('{!r} occurs {} times'.format(word, freq))
 
-            
+
+    def main():
+        import sys
+        import cleanup as clean
+        arguments = sys.argv[1:]
+        if len(arguments) >= 1:
+            print_histogram(arguments)
+        else:
+            # onefish_list = clean.clean_tex('onefish.txt')
+            # onefish_list.append("STOP")
+            # markov_dict = second_order_markov_chain(onefish_list)
+
+
+
+    if __name__ == '__main__'
+    main()
