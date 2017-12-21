@@ -51,7 +51,7 @@ class Markov_chain_Nth_order(object):
 
         input_sentence = " ".join(tokens)
         print("\nInput Sentece: {}... \n".format(input_sentence[:400]))
-        print("WORD COUNT OF CORPUS: >400,000\n")
+        print("WORD COUNT OF CORPUS: > 924,670\n")
 
         return
 
@@ -87,6 +87,8 @@ class Markov_chain_Nth_order(object):
         random_selection = ri.choice(list(self.states))
         cur_position = ''.join(random_selection)
         return cur_position
+        # current_position = self.states[pos][ri(0, len(self.states[pos]) - 1)]
+        # return current_position
 
 
     def create_markov_model(self):
