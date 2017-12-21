@@ -1,6 +1,6 @@
 from pprint import pprint
 from time import time as t
-from random import random as ri
+import random as ri
 import sys
 
 class Markov_chain_Nth_order(object):
@@ -84,13 +84,12 @@ class Markov_chain_Nth_order(object):
 
     def select_cur_position(self, pos):
         """Method to select word position in the corpus randomly"""
-        cur_position = self.states[pos][ri(0, len(self.state[pos]) -1)]
+        random_selection = ri.choice(list(self.states))
+        cur_position = ''.join(random_selection)
         return cur_position
 
 
-
-
-    def create_markov_model():
+    def create_markov_model(self):
         """Create and run class instance, create copus from Harry Potter book"""
 
         with open("harry_potter_books.txt") as f:
@@ -119,15 +118,17 @@ class Markov_chain_Nth_order(object):
 
 
 
-    def main():
-        t0 = t()
-        create_markov_model()
-        t1 = t()
-        delta = t1 - t0
+def main():
+    m = Markov_chain_Nth_order(1)
+    t0 = t()
+    a = m.create_markov_model()
+    t1 = t()
+    delta = t1 - t0
 
-        print("\n\nTotal runtime is {0:.3g} seconds.\n".format(delta))
-        return
+    print("\n\nTotal runtime is {0:.3g} seconds.\n".format(delta))
+    print(a)
+    return
 
 
-    if __name__ == '__main__':
-        main()
+if __name__ == '__main__':
+    main()
