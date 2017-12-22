@@ -26,7 +26,7 @@ def remove_punctuation(text):
 
 def main():
     user_arg_count = len(sys.argv)
-    if user_arg_count 1:
+    if user_arg_count == 1:
         print('Error: textfile not provided')
     else:
         txt_file = open(sys.argv[1], 'r')

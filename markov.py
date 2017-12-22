@@ -29,7 +29,7 @@ class Markov(dict):
 
 
     def frequency(self, word):
-        if word not is self:
+        if word not in self:
             return 0
         return self[word]
 
@@ -40,7 +40,7 @@ class Markov(dict):
         """Search through the list of words"""
         while index < len(word_list) -1:
             cur_word = word_list[index]
-            next_word = word_list[index+1]
+            next_word = word_list[index + 1]
 
             if cur_word not in markov.keys():
                 markov[cur_word] = Markov()
@@ -56,13 +56,15 @@ class Markov(dict):
         """ Search through the dictograms"""
         while index < len(word_list) - 2:
             cur_word = word_list[index]
-            next_word = word_list[index+1]
-            word_after_next = word_list[index+2]
+            next_word = word_list[index + 1]
+            word_after_next = word_list[index + 2]
             #adding the word to the dictionary
             if(cur_word, next_word) not in markov.keys():
-                markov[(cur_word, next_word)].add_count(word_after_next)
-                index += 1
-                return markov
+                markov[(cur_word, next_word)] = Markov()
+            markov[(cur_word, next_word)].add_count(word_after_next)
+            index += 1
+        return markov
+        print("HERE:", markov)
 
 
     def print_histogram(word_list):
@@ -77,18 +79,19 @@ class Markov(dict):
             print('{!r} occurs {} times'.format(word, freq))
 
 
-    def main():
-        import sys
-        import cleanup as clean
-        arguments = sys.argv[1:]
-        if len(arguments) >= 1:
-            print_histogram(arguments)
-        else:
-            # onefish_list = clean.clean_tex('onefish.txt')
-            # onefish_list.append("STOP")
-            # markov_dict = second_order_markov_chain(onefish_list)
+def main():
+    import sys
+    import cleanup as clean
+    arguments = sys.argv[1:]
+    if len(arguments) >= 1:
+        print_histogram(arguments)
+    else:
+        potter_books = clean.clean_txt('onefish.txt')
+        #print(potter_books)
+        potter_books.append("STOP")
+        print(potter_books)
+        #markov_dict = second_order_markov_chain()
 
 
-
-    if __name__ == '__main__'
+if __name__ == '__main__':
     main()

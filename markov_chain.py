@@ -64,7 +64,7 @@ class Markov_chain_Nth_order(object):
     def create_markov_model(self):
         """Create and run class instance, create copus from Harry Potter book"""
 
-        with open("fishes.txt") as f:
+        with open("harry_potter_books.txt") as f:
             corpus = f.read().split()
 
         if len(sys.argv) > 1:
@@ -107,7 +107,7 @@ def main():
     delta = t1 - t0
 
     print("\n\nTotal runtime is {0:.3g} seconds.\n".format(delta))
-    print(a)
+    #print(a)
     return
 
 
