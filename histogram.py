@@ -43,4 +43,30 @@ def histogram_tuples_list(text_list):
             word_frequency.append(initial_tuple)
     return word_frequency
 
-# def unique_word()
+def unique_word(harry_dic):
+    number_of_keys = len(harry_dic.keys())
+    return number_of_keys
+
+def frequency(harry_dic, word):
+    return harry_dic[word]
+
+def write_to_file(harry_dic):
+    with open('harry_potter_books.txt') as f:
+        for k, v in harry_dic.items():
+            f.write(str(k) + ' : ' + str(v) + '\n\n')
+
+def run_histogram():
+    start_time = time.time()
+    print(start_time)
+
+    text_list = c.clean_txt('onefish.txt')
+    onefish_dic = histogram_dict(text_list)
+
+    print(onefish_dic)
+    print(list(onefish_dic.items()))
+
+    end_time = time.time()
+    print(abs(start_time-end_time))
+
+if __name__ == '__main__':
+    run_histogram()

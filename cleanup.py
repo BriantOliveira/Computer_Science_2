@@ -6,7 +6,7 @@ import re
 
 
 def clean_txt(filename):
-    txt_file = open('harry_potter_books.txt')
+    txt_file = open(filename, 'r')
     word_list = txt_file.read().lower()
     remove_punctuation(word_list)
     result_list = []
@@ -29,7 +29,8 @@ def main():
     if user_arg_count == 1:
         print('Error: textfile not provided')
     else:
-        txt_file = open('harry_potter_books.txt')
+        txt_file = open(sys.argv[1], 'r')
+        #txt_file = open('harry_potter_books.txt')
         word_list = txt_file.read().lower()
         print(word_list)
 

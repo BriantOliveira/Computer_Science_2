@@ -22,9 +22,7 @@ class Clean():
         word_list = self.single_words(long_string)
         return word_list
 
-def main():
-    file_name = 'harry_potter_books.txt'
-    Clean().clean_txt(file_name)
 
-if __name__ == '__main__':
-    main()
+file_name = "harry_potter_books.txt"
+Clean().text_cleaner(file_name)
+print(file_name)
