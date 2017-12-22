@@ -39,4 +39,8 @@ def histogram_tuples_list(text_list):
         word = text_list[word]
         frequency = text_list.count(word)
         initial_tuple = (word, frequency)
-        if initial_tuple not in word_frequency
+        if initial_tuple not in word_frequency:
+            word_frequency.append(initial_tuple)
+    return word_frequency
+
+# def unique_word()
