@@ -13,4 +13,4 @@ ROUTES
 def random_sentence():
     clean_list = s.clean_txt)
     clean_list.append("STOP")
-    sentence = s.c
+    sentence = 
