@@ -3,6 +3,7 @@ from time import time as t
 import random as ri
 import sys
 
+
 class Markov_chain_Nth_order(object):
     def __init__(self, order=1):
         self.states = {}
@@ -12,36 +13,19 @@ class Markov_chain_Nth_order(object):
         else:
             raise Expection("\nInvalid parameter: Integer only.")
 
-
-
-
-    def initialize_chain(self):
-        n = self.order
-        chain = []
-
-        #tuple with N size
-        for _ in range(n):
-            chain.append("")
-
-        return tuple(chain)
-
-
-
-
     def add_to_chain(self, old, step):
         new = old[1:] + (step, )
         return new
 
-
-
-
     def create_states(self, tokens):
         """Creating states from the sentences"""
-        prev = self.initialize_chain()
+        prev = tuple(tokens[:self.order])
 
         #Create Markov
-        for token in tokens:
-            if not prev in self.states:
+        for i in range(self.order, len(tokens)):
+            token = tokens[i]
+
+            if prev not in self.states:
                 self.states[prev] = []
 
             cur = self.add_to_chain(prev, token)
@@ -50,51 +34,37 @@ class Markov_chain_Nth_order(object):
             prev = cur
 
         input_sentence = " ".join(tokens)
-        print("\nInput Sentece: {}... \n".format(input_sentence[:400]))
-        print("WORD COUNT OF CORPUS: > 924,670\n")
-
-        return
-
-
 
 
     def construct_sentence(self):
         """Sample Dictagram and build new sentences"""
+        cur_position = self.select_cur_position()
+        sentence = ""
 
-        chain = self.initialize_chain()
-        cur_position = self.select_cur_position(chain)
-        start, delimiter, is_first = "", " ", True
+        while (cur_position, ) in self.states:
+            sentence += " " + cur_position
+            cur_position = self.select_cur_position(cur_position)
 
-        print("CHAIN: {}\n".format(chain))
+            if cur_position[-1] == '.':
+                break
 
-        while (cur_position in self.states) and (cur_position != chain) and (cur_position != None):
-            if not is_first:
-                start += delimiter
+        return sentence
 
-                start += cur_position[len(cur_position) -1]
-                cur_position = self.select_cur_position(cur_position)
-                is_first = False
-
-        walk_over = start + delimiter + cur_position[len(cur_position) -1]
-
-        return walk_over
-
-
-
-
-    def select_cur_position(self, pos):
+    def select_cur_position(self, pos=None):
         """Method to select word position in the corpus randomly"""
-        random_selection = ri.choice(list(self.states))
-        cur_position = ''.join(random_selection)
-        return cur_position
-        # current_position = self.states[pos][ri(0, len(self.states[pos]) - 1)]
-        # return current_position
+        if pos is None:
+            random_selection = ri.choice(list(self.states))
+            cur_position = ''.join(random_selection)
+            return cur_position
 
+        state = self.states[(pos, )]
+        word = ri.choice(state)
+        return ' '.join(word)
 
     def create_markov_model(self):
         """Create and run class instance, create copus from Harry Potter book"""
 
-        with open("harry_potter_books.txt") as f:
+        with open("fishes.txt") as f:
             corpus = f.read().split()
 
         if len(sys.argv) > 1:
@@ -112,6 +82,8 @@ class Markov_chain_Nth_order(object):
             # Random walk over then reformating to final sentence
             markov.create_states(corpus)
             random_walk_over = markov.construct_sentence()
+
+            print(random_walk_over)
             output = random_walk_over[0].upper() + random_walk_over[1:]
 
             print("OUTPUT SENTENCE: {}...".format(output[:140]))
@@ -119,6 +91,13 @@ class Markov_chain_Nth_order(object):
 
 
 
+"""
+What we are not doing:
+
+- No stocastic sampling
+- Look into deque
+
+"""
 
 def main():
     m = Markov_chain_Nth_order(1)
