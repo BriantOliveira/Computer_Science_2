@@ -3,7 +3,7 @@ import cleanup as c
 import random, sys, re
 import markov as m
 from pprint import pprint
-#from collections import word_frequency
+#from collections import frequency_of_given_word
 
 
 def create_dictionary_from_list(clean_list):
