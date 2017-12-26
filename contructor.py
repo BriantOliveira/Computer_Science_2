@@ -55,9 +55,6 @@ def random_tuple_probability(dictionary_with_weight):
 
 
 def get_many_random_words(dictionary, num):
-     """
-     Create a dictionary of random word
-     """
     random_dictionary = {}
     while sum(random_dictionary.values()) < int(num):
         random_word = get_random_word_probability(dictionary)
@@ -72,4 +69,15 @@ def find_word_after_tuple(tuple_key, markov_dict):
     next_random_word = get_random_word(histogram)
     return next_random_word
 
-    
+def find_word_after_random_word(random_word, markov_dict):
+
+    for (types, histogram) in markov_dict.items():
+        if types == random_word:
+            histogram = markov_dict[types]
+            if len(histogram) > 1:
+                next_random_word = get_random_word(histogram)
+                return next_random_word
+            else:
+                for (k, v) in histogram.items():
+                    next_random_word = k
+                    return next_random_word
