@@ -3,7 +3,7 @@ import cleanup as c
 import random, sys, re
 import markov as m
 from pprint import pprint
-from collections import word_frequency
+#from collections import word_frequency
 
 
 def create_dictionary_from_list(clean_list):
@@ -37,5 +37,22 @@ def _probability_(dictionary):
     for (word, value) in dictionary.items():
         weight = float(value / total_tokens)
         dictionary_with_weight[word] = weight
-        del dictionary_with_weight[('dream', 'STOP')]
-        return dictionary_with_weight
+    del dictionary_with_weight[('dream', 'STOP')]
+    return dictionary_with_weight
+
+def random_tuple_probability(dictionary_with_weight):
+"""
+Select a random word based on it's probability
+"""
+    random_float = random.random()
+    probability = 0.0
+
+    for tpl, word_weight in dictionary_with_weight.items():
+        probability += word_weight
+        if random_float < probability:
+            break
+    return tpl
+
+
+def get_many_random_words(dictionary, num):
+     
