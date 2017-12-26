@@ -41,9 +41,9 @@ def _probability_(dictionary):
     return dictionary_with_weight
 
 def random_tuple_probability(dictionary_with_weight):
-"""
-Select a random word based on it's probability
-"""
+    """
+    Select a random word based on it's probability
+    """
     random_float = random.random()
     probability = 0.0
 
@@ -55,4 +55,16 @@ Select a random word based on it's probability
 
 
 def get_many_random_words(dictionary, num):
-     
+     """
+     Create a dictionary of random word
+     """
+    random_dictionary = {}
+    while sum(random_dictionary.values()) < int(num):
+        random_word = get_random_word_probability(dictionary)
+        if random_word not in random_dictionary:
+            random_dictionary[random_word] = 1
+        else:
+            random_dictionary[random_word] += 1
+    return random_dictionary
+
+    
