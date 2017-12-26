@@ -127,3 +127,7 @@ def limit_140_chars(rand_sentence):
     tweet = re.sub("does n", "doesn't", tweet)
     tweet = re.sub("doesn t", "doesn't", tweet)
     return tweet
+
+if __name__ == '__main__':
+    clean_list = clean_text()
+    construct_sentence(18, clean_list)
