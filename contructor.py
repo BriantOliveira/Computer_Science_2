@@ -67,4 +67,9 @@ def get_many_random_words(dictionary, num):
             random_dictionary[random_word] += 1
     return random_dictionary
 
+def find_word_after_tuple(tuple_key, markov_dict):
+    histogram = markov_dict.get(tuple_key)
+    next_random_word = get_random_word(histogram)
+    return next_random_word
+
     
