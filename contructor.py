@@ -16,4 +16,26 @@ def create_dictionary_from_list(clean_list):
         next = clean_list[index + 1]
         list_of_pairs.append((current, next))
     dictionary = h.histogram_dict(list_of_pairs)
-    return dictionary    
+    return dictionary
+
+def get_random_word(dictionary):
+    """
+    Return a tuple from a dictionary
+    """
+    rand_index = random.randint(0, len(dictionary) -1)
+    key_list = list(dictionary)
+    random_word = key_list[rand_index]
+    return random_word
+
+def _probability_(dictionary):
+    """
+    Get a random word and dictionary and return new dictionary
+    """
+    total_tokens = sum(dictionary.values())
+    dictionary_with_weight = {}
+
+    for (word, value) in dictionary.items():
+        weight = float(value / total_tokens)
+        dictionary_with_weight[word] = weight
+        del dictionary_with_weight[('dream', 'STOP')]
+        return dictionary_with_weight
