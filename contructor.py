@@ -81,3 +81,49 @@ def find_word_after_random_word(random_word, markov_dict):
                 for (k, v) in histogram.items():
                     next_random_word = k
                     return next_random_word
+def create_sentence(word_num, dictionary_with_weight, markov_dict):
+    sentence = []
+    random_tuple = random_tuple_probability(dictionary_with_weight)
+    second_to_last = random_tuple[0]
+    last_word = random_tuple[1]
+    sentence.append(second_to_last)
+    sentence.append(last_word)
+    next_word = find_word_after_tuple(random_tuple, markov_dict)
+
+    while len(sentence) < word_num:
+        random_tuple = (last_word, next_word)
+        second_to_last = last_word
+        if next_word != 'STOP':
+            sentence.append(next_word)
+            next_word = find_word_after_tuple(random_tuple,markov_dict)
+        else:
+            break
+    joined = " ".join(sentence) + "."
+    return joined
+
+def clean_text():
+    clean_list = c.clean_txt('harry_potter_books.txt')
+    clean_list.append("STOP")
+    return clean_list
+
+clean_list = clean_text()
+
+def construct_sentence(word_num, clean_list):
+    markov_dict = m.second_order_markov_chain(clean_list)
+    dictionary =  create_dictionary_from_list(clean_list)
+    dictionary_with_weight = _probability_(dictionary)
+    random_sentence = create_sentence(word_num, dictionary_with_weight, markov_dict)
+    tweet = limit_140_chars(random_sentence)
+    print(tweet)
+    return tweet
+
+def limit_140_chars(rand_sentence):
+    tweet = rand_sentence[0:140]
+    tweet = re.sub('([a-zA-Z])', lambda x: x.groups()[0].upper(), tweet, 1)
+    tweet = re.sub(' i ', ' I ', tweet)
+    tweet = re.sub("i'm", "I'm", tweet)
+    tweet = re.sub("i s", "is", tweet)
+    tweet = re.sub("i'd", "I'd", tweet)
+    tweet = re.sub("does n", "doesn't", tweet)
+    tweet = re.sub("doesn t", "doesn't", tweet)
+    return tweet
